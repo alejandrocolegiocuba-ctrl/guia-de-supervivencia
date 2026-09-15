@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misiones que hacer | Guía de supervivencia en Madrid</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Guía de supervivencia en Madrid</a>
+      <a class="back-link" href="index.html">← Volver a la guía</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero compact container">
+      <p class="eyebrow">MISIONES</p>
+      <h1>Misiones que hacer</h1>
+      <p class="hero-text">Pequeñas cosas que hay que hacer para sobrevivir a Madrid como es debido. Marca cada misión cuando esté completada.</p>
+    </section>
+
+    <section class="container section-block missions-section">
+      <div class="missions-progress" aria-live="polite">
+        <div>
+          <span class="progress-label">PROGRESO</span>
+          <strong id="progress-text">0 de 3 misiones completadas</strong>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+
+      <div class="missions-list">
+        <article class="mission-card" data-mission="termicas">
+          <button class="mission-check" type="button" aria-label="Marcar misión Conseguir camisetas térmicas del Decathlon como completada"><span>✓</span></button>
+          <div class="mission-content">
+            <span class="mission-number">MISIÓN 01</span>
+            <h2>Conseguir camisetas térmicas del Decathlon</h2>
+            <p>Son baratas, son calentitas y si se rompen, otra.</p>
+            <span class="mission-done-label">Misión completada</span>
+          </div>
+        </article>
+
+        <article class="mission-card" data-mission="kultur">
+          <button class="mission-check" type="button" aria-label="Marcar misión Descargar la app de Kultur como completada"><span>✓</span></button>
+          <div class="mission-content">
+            <span class="mission-number">MISIÓN 02</span>
+            <h2>Descargar la app de Kultur</h2>
+            <p>¿Descuentos en cultura? Es la app de Kari.</p>
+            <span class="mission-done-label">Misión completada</span>
+          </div>
+        </article>
+
+        <article class="mission-card" data-mission="citymapper">
+          <button class="mission-check" type="button" aria-label="Marcar misión Descargar Citymapper como completada"><span>✓</span></button>
+          <div class="mission-content">
+            <span class="mission-number">MISIÓN 03</span>
+            <h2>Descargar Citymapper</h2>
+            <p>Te dice cómo llegar a los sitios con transporte público.</p>
+            <div class="mission-warning"><strong>ADVERTENCIA:</strong> Siempre será más cómodo llamar a Alejandro.</div>
+            <span class="mission-done-label">Misión completada</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container">Guía de supervivencia en Madrid</div></footer>
+
+  <script>
+    const cards = [...document.querySelectorAll('.mission-card')];
+    const storageKey = 'guiaMadridMisiones';
+    let completed = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
+    function render() {
+      cards.forEach(card => {
+        const done = completed.includes(card.dataset.mission);
+        card.classList.toggle('completed', done);
+        card.querySelector('.mission-check').setAttribute('aria-pressed', done);
+      });
+      const count = completed.length;
+      document.getElementById('progress-text').textContent = `${count} de ${cards.length} misiones completadas`;
+      document.getElementById('progress-fill').style.width = `${(count / cards.length) * 100}%`;
+    }
+
+    cards.forEach(card => {
+      card.querySelector('.mission-check').addEventListener('click', () => {
+        const id = card.dataset.mission;
+        if (completed.includes(id)) {
+          completed = completed.filter(item => item !== id);
+        } else {
+          completed.push(id);
+          card.classList.remove('celebrate');
+          void card.offsetWidth;
+          card.classList.add('celebrate');
+        }
+        localStorage.setItem(storageKey, JSON.stringify(completed));
+        render();
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>
