@@ -1,0 +1,1 @@
+Prueba: iniciar sesión en index.html y comprobar que frase-del-dia.html reconoce automáticamente la misma sesión de Supabase.
