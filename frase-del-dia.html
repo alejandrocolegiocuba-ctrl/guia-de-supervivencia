@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quizá necesitas leer esto hoy | Guía de Madrid</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#183552;background:linear-gradient(145deg,#fff7f0,#f5f0fb 48%,#e9f4f5);display:flex;flex-direction:column}.topbar{width:min(1080px,calc(100% - 36px));margin:0 auto;padding:25px 0;display:flex;align-items:center;justify-content:space-between}.brand{color:#183552;text-decoration:none;font-weight:850}.back{padding:10px 15px;border-radius:999px;background:rgba(255,255,255,.72);color:#5c6f82;text-decoration:none;font-size:.85rem;font-weight:750;border:1px solid rgba(24,53,82,.08)}main{width:min(1080px,calc(100% - 36px));margin:auto;padding:30px 0 75px}.daily{position:relative;overflow:hidden;max-width:850px;margin:auto;padding:65px 70px;border-radius:38px;background:rgba(255,255,255,.82);box-shadow:0 25px 70px rgba(57,66,91,.12);text-align:center;backdrop-filter:blur(16px)}.blob{position:absolute;border-radius:50%;filter:blur(1px);z-index:-1}.b1{width:230px;height:230px;background:#ffe1cf;left:-90px;top:-80px}.b2{width:190px;height:190px;background:#dcecf5;right:-55px;bottom:-65px}.b3{width:100px;height:100px;background:#eee2f7;right:14%;top:8%}.eyebrow{display:inline-block;padding:8px 13px;border-radius:999px;background:#fff0b9;color:#756329;font-size:.68rem;font-weight:900;letter-spacing:.13em}.date{margin:18px 0 38px;color:#8a96a4;font-size:.88rem;text-transform:capitalize}.quote-mark{font-family:Georgia,serif;font-size:5rem;line-height:.4;color:#efb5aa}.daily blockquote{max-width:680px;margin:25px auto 32px;font-family:"Comic Sans MS","Segoe Print",cursive;font-size:clamp(2.25rem,5vw,4rem);line-height:1.12;letter-spacing:-.035em;color:#173653}.tomorrow{margin:0;color:#748598;font-size:.92rem}.heart{margin-top:30px;border:0;padding:12px 18px;border-radius:999px;background:#f7e5e8;color:#7a4e58;font-weight:800;cursor:pointer;transition:.2s}.heart.saved{background:#dff1e6;color:#3f7355}.counter{margin-top:12px;color:#96a1ac;font-size:.72rem}.hint{max-width:640px;margin:25px auto 0;text-align:center;color:#8190a0;font-size:.8rem}@media(max-width:600px){.daily{padding:48px 25px;border-radius:28px}.topbar{padding-top:18px}.brand{font-size:.85rem}.date{margin-bottom:30px}}
+</style>
+</head>
+<body><header class="topbar"><a class="brand" href="index.html">Guía de supervivencia en Madrid</a><a class="back" href="index.html">← Volver a la guía</a></header><main><section class="daily"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><span class="eyebrow">UN MENSAJE PARA HOY</span><div class="date" id="date"></div><div class="quote-mark">“</div><blockquote id="quote"></blockquote><p class="tomorrow">Mañana habrá algo nuevo esperándote.</p><button class="heart" id="save">♡ Guardar esta frase</button><div class="counter" id="counter"></div></section><p class="hint">Las frases cambian automáticamente cada día. Esta primera selección es provisional y podremos sustituirla por tus propios mensajes.</p></main>
+<script>
+const phrases=[
+'No tienes que tenerlo todo claro para saber que estás avanzando.',
+'Hay días que no necesitan grandes planes, solo un poco de calma.',
+'Empezar de nuevo también es una forma de seguir adelante.',
+'Lo desconocido da un poco de miedo hasta que empieza a sentirse como casa.',
+'No todo lo importante tiene que ocurrir deprisa.',
+'Quizá hoy solo necesitas recordar todo lo que ya has conseguido.',
+'Los días normales también terminan convirtiéndose en recuerdos.',
+'Poco a poco también es una dirección.',
+'No hace falta conocer todo el camino para dar el siguiente paso.',
+'A veces una nueva etapa empieza con algo tan pequeño como atreverse.',
+'Está bien echar de menos algo y, al mismo tiempo, ilusionarse con lo que viene.',
+'Que hoy sea sencillo no significa que sea poco importante.'
+];
+const now=new Date();
+const localDay=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+const dayNumber=Math.floor(localDay.getTime()/86400000);
+const index=((dayNumber%phrases.length)+phrases.length)%phrases.length;
+const quote=phrases[index];
+document.getElementById('quote').textContent='“'+quote+'”';
+document.getElementById('date').textContent=new Intl.DateTimeFormat('es-ES',{weekday:'long',day:'numeric',month:'long'}).format(now);
+document.getElementById('counter').textContent='Frase '+(index+1)+' de '+phrases.length;
+const key='frasesGuardadasMadrid',btn=document.getElementById('save');
+let saved=[];try{saved=JSON.parse(localStorage.getItem(key)||'[]')}catch{saved=[]}
+function paint(){const yes=saved.includes(quote);btn.classList.toggle('saved',yes);btn.textContent=yes?'♥ Frase guardada':'♡ Guardar esta frase'}
+btn.addEventListener('click',()=>{saved=saved.includes(quote)?saved.filter(x=>x!==quote):[...saved,quote];localStorage.setItem(key,JSON.stringify(saved));paint()});paint();
+</script></body></html>
