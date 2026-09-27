@@ -18,7 +18,7 @@
       const card=document.createElement('a');
       card.className='clean-card parks-home-card';
       card.href='parques.html';
-      card.innerHTML='<div class="icon-box">♧</div><small>PARQUES · JARDINES · NATURALEZA</small><h3>¿Necesitas respirar?</h3><p>Lugares para bajar el volumen: jardines, naturaleza, flores y atardeceres para escapar un rato del ruido.</p><span class="arrow">→</span>';
+      card.innerHTML='<div class="icon-box">♧</div><small>PARQUES · JARDINES · NATURALEZA</small><h3>¿Necesitas respirar?</h3><p>Parques, jardines, flores y rincones para desconectar.</p><span class="arrow">→</span>';
       grid.appendChild(card);
     }
 
