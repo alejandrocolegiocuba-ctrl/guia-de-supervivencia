@@ -28,8 +28,6 @@ function closeSecret(){secret.classList.remove('open');access.classList.remove('
 if(sessionStorage.getItem('mapaUnlocked')==='yes')openSecret();
 form.addEventListener('submit',e=>{e.preventDefault();if(input.value==='KariMadrid'){error.textContent='';openSecret()}else{error.textContent='Esa no es la clave. Prueba otra vez.';input.select()}});
 document.getElementById('logout').addEventListener('click',closeSecret);
-renderPicker();const newest=secretList.lastElementChild;if(newest)newest.scrollIntoView({behavior:'smooth',block:'nearest'})}});
-document.getElementById('logout').addEventListener('click',closeSecret);
-renderRevealed();
+renderPicker();
 </script>
 </body></html>
