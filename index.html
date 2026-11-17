@@ -663,10 +663,27 @@
                 bottom: 10px
             }
         }
+    
+        .baldoria-alert{max-width:1180px;margin:18px auto 10px;padding:24px 28px;border:2px solid #c92d39;border-radius:24px;background:linear-gradient(125deg,#9f1425,#d12c3d);color:#fff;box-shadow:0 14px 34px #8e102b35}
+        .baldoria-alert .alert-kicker{display:inline-block;font-size:.83rem;font-weight:900;letter-spacing:.14em;color:#fff3d2}
+        .baldoria-alert h2{margin:9px 0 12px;color:#fff;font-size:clamp(1.5rem,3.2vw,2.35rem);line-height:1.2}
+        .baldoria-alert p{max-width:980px;margin:0 0 12px;color:#fff;line-height:1.65;font-size:1rem}
+        .baldoria-alert .alert-details{font-weight:800;color:#fff8e9}
+        .baldoria-alert a{color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:800}
+        @media(max-width:700px){.baldoria-alert{margin:12px 12px 8px;padding:20px 19px;border-radius:18px}}
     </style>
 </head>
 
 <body class="home-clean">
+    <section id="baldoriaAlert" class="baldoria-alert" role="status" aria-label="Atención: cena de hoy en Baldoria" hidden>
+        <span class="alert-kicker">● ATENCIÓN · NOTICIA DE ÚLTIMA HORA</span>
+        <h2>¡Hoy tienes una cena a las 22:00 en Baldoria!</h2>
+        <p>Esta noche, Madrid te reserva una cita con la auténtica alegría italiana. Baldoria, el restaurante del chef napolitano Ciro Cristiano, no es una pizzería cualquiera: en 2026 fue elegido <strong>mejor pizzería de España, segunda de Europa y octava del mundo</strong> por 50 Top Pizza. Una pequeña maravilla gastronómica donde la masa napolitana reposa 48 horas, la pasta se elabora fresca y cada rincón rebosa color, música y ganas de celebrar.</p>
+        <p>Una velada para disfrutar sin prisas, dejarse sorprender por sus sabores y convertir una cena de martes en uno de esos recuerdos que merece la pena guardar.</p>
+        <p class="alert-details">HOY · MARTES 17 DE NOVIEMBRE · 22:00 H · BALDORIA, MADRID<br>Calle de José Ortega y Gasset, 100 · Entrada por Mártires Concepcionistas, 23</p>
+        <a href="https://baldoriamadrid.com/" target="_blank" rel="noopener noreferrer">Conoce Baldoria</a>
+    </section>
+    <script>(function(){const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());document.getElementById('baldoriaAlert').hidden=today!=='2026-11-17';})();</script>
     <header class="site-header">
         <div class="container header-inner"><a class="brand" href="index.html"><span
                     class="logo-bear">M</span><span>Guía de supervivencia<br>en Madrid</span></a>
